@@ -13,6 +13,8 @@ The philosophy of Februus is:
 * Cross-Platform
 * Multi-Language
 * SaaS oriented design
+* Auto Documentation
+* Self Validation
 * Design your software with a fully-functional-mockup
 
 Sponsored by Richi Inc.
