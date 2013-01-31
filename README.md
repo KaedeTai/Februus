@@ -1,7 +1,7 @@
 Februus
 =======
 
-A purified framework for web &amp; mobile development, which allow us to "febricate" software products quickly but also have good quality. Named after the Roman God of Purification Februus.
+A purified framework for web &amp; mobile development, which allow us to "febricate" software products quickly but also have good quality. Named after Februus, the Roman God of Purification.
 
 The project eventually will support as many languages as possible. The first Language supported is PHP, which is called "phebruus".
 
