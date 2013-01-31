@@ -10,5 +10,6 @@ The philosophy of Februus is:
 * Keep It Simple & Stupid
 * IDE integrated total solution
 * Compatible with other frameworks
+* SaaS oriented design
 
 Sponsored by Richi Inc.
