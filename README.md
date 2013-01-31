@@ -15,6 +15,7 @@ The philosophy of Februus is:
 * SaaS oriented design
 * Auto Documentation
 * Self Validation
+* Follow all the recent or future standards
 * Design your software with a fully-functional-mockup
 
 Sponsored by Richi Inc.
