@@ -11,5 +11,6 @@ The philosophy of Februus is:
 * IDE integrated total solution
 * Compatible with other frameworks
 * SaaS oriented design
+* Design your software with a fully-functional-mockup
 
 Sponsored by Richi Inc.
