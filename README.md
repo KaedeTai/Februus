@@ -10,6 +10,8 @@ The philosophy of Februus is:
 * Keep It Simple & Stupid
 * IDE integrated total solution
 * Compatible with other frameworks
+* Cross-Platform
+* Multi-Language
 * SaaS oriented design
 * Design your software with a fully-functional-mockup
 
