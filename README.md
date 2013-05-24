@@ -11,7 +11,7 @@ The philosophy of Februus is:
 * IDE integrated total solution
 * Compatible with other frameworks
 * Cross-Platform
-* Multi-Language
+* Multilingual
 * SaaS oriented design
 * Auto Documentation
 * Self Validation
