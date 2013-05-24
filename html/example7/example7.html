@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<title>jQuery Mobile 的 Mobile 範例</title>
+	<meta charset="utf-8" />
+	<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no" />
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.animate-enhanced.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.mobile-1.2.0.min.js"></script>
+	<!--  <script type="text/javascript" src="jquery.mobile.swipe.js"></script>  -->
+	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script type="text/javascript" src="/js/lang.js"></script>
+	<script type="text/javascript" src="example7.js"></script>
+	<!-- <script type="text/javascript" src="/js/iscroll.js"></script> -->
+	
+	<link rel="stylesheet" type="text/css" href="/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="example7.css" />
+	
+	<!--JQM SlideMenu-->
+	<script type="text/javascript" src="jqm.slidemenu.js"></script>
+	<link rel="stylesheet" type="text/css" href="jqm.slidemenu.css" />
+	
+	
+
+</head>
+<body>
+	<!-- Menu -->
+	<div id="slidemenu">
+		<h3>MENU</h3>
+		<ul>
+			<li><a href="#transaction">NEW TRANSACTION</a></li>
+			<li><a href="#exchange">BASIC EXCHANGE RATE</a></li>
+			<li><a href="#promotions">PROMOTIONS</a></li>
+			<li><a href="#another_page3">MEMBERS</a></li>
+			<li><a id="logout" href="#home">LOG OUT</a></li>
+		</ul>
+	</div>
+	
+	<!-- Home -->
+	<div data-role="page" id="home">
+		<div data-role="content">
+			<h2 align="center">
+				Richi
+			</h2>
+			<h2 align="center">
+				LOYALTY REWARD PROGRAM
+			</h2>
+			<a id="btn_create_account" data-role="button" data-theme="a" data-transition="slide" href="#create">
+				Create Account
+			</a>
+			<a id="btn_login" data-role="button" data-theme="a" data-transition="slide" href="#login">
+				Login
+			</a>
+		</div>
+	</div>
+	
+	<!-- Login -->
+	<div data-role="page" id="login">
+		<div data-theme="a" data-role="header">
+			<a href="#home" data-rel="back">Back</a>
+			<h3>
+				LOGIN
+			</h3>
+		</div>
+		<div data-role="content">
+			<form id="login_form" action="">
+				<div>
+					<fieldset data-role="controlgroup">
+						<label for="login_email">
+							Email Address:
+						</label>
+						<input name="email" id="login_email" placeholder="" value="" type="email">
+					</fieldset>
+				</div>
+				<div>
+					<fieldset data-role="controlgroup">
+						<label for="login_password">
+							Password:
+						</label>
+						<input name="password" id="login_password" placeholder="" value="" type="password">
+					</fieldset>
+				</div>
+				<div>
+					<a href="" data-transition="slide">
+						Forgot password?
+					</a>
+				</div>
+				<a id="login_done" class="ui-disabled" data-role="button" data-theme="a" data-transition="slide">
+					Done
+				</a>
+			</form>
+		</div>
+	</div>
+	
+	<!-- Create Account -->
+	<div data-role="page" id="create">
+		<div data-theme="a" data-role="header">
+			<a href="#home" data-rel="back">Back</a>
+			<h3>
+				CREATE ACCOUNT
+			</h3>
+		</div>
+		<div data-role="content">
+			<form id="create_form" method="post" data-ajax="true" data-transition="slide">
+				<div>
+					<fieldset data-role="controlgroup">
+						<label for="create_shop">
+							Shop Name:
+						</label>
+						<input name="name" id="create_shop" placeholder="" value="" type="text">
+					</fieldset>
+				</div>
+				<div>
+					<fieldset data-role="controlgroup">
+						<label for="create_email">
+							Email Address:
+						</label>
+						<input name="email" id="create_email" placeholder="" value="" type="email">
+					</fieldset>
+				</div>
+				<div>
+					<fieldset data-role="controlgroup">
+						<label for="create_password">
+							Password:
+						</label>
+						<input name="password" id="create_password" placeholder="" value="" type="password">
+					</fieldset>
+				</div>
+				<h5>
+					By click done below,you are indicating that you have read and agree to Richi's Term of Service and Privacy Policy.
+				</h5>
+				<!--  
+				<a id="create_done" class="ui-disabled" class data-role="button" data-theme="a" data-transition="slide" href="#verification">
+					Done
+				</a>
+				-->
+				<input id="create_done" type="submit" value="Done" id="create_done" class="ui-disabled" data-role="button" data-theme="a" data-transition="slide">
+			</form>
+		</div>
+	</div>
+	
+	<!-- Verification  -->
+	<div data-role="page" id="verification">
+		<div data-theme="a" data-role="header">
+			<h3>
+				ENTER VERIFICATION CODE
+			</h3>
+		</div>
+		<div data-role="content">
+			<h5>
+				Congratulations! Your Richi account has been created.
+			</h5>
+			<h5>
+				Before continuing,please verify your email address. We have sent a verification code to your email address.Please click the link in your email or enter the verification code below to verify your email address.
+			</h5>
+			<div>
+				<fieldset data-role="controlgroup">
+					<label for="verification_code">
+						Verification code:
+					</label>
+					<input name="" id="verification_code" placeholder="" value="" type="text">
+				</fieldset>
+			</div>
+			<a id="verification_done" class="ui-disabled" data-role="button" data-theme="a" data-transition="slide" href="#exchange">
+				Next
+			</a>
+			<div>
+				<a href="" data-transition="slide">
+					Resend verification code
+				</a>
+			</div>
+			<div>
+				<a href="#home" data-rel="back">
+					Back to MainMenu
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<!-- New Transaction -->
+	<div data-role="page" id="transaction" class="sliedmain">
+		<div data-theme="a" data-role="header">
+			<a href="javascript:void(0)" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+			<h3>
+				NEW TRANSACATION
+			</h3>
+		</div>
+		<div data-role="content">
+			<div>
+				<fieldset data-role="controlgroup">
+					<label for="transaction_amount">
+						Enter Total Amount:
+					</label>
+					<input name="" id="transaction_amount" placeholder="" value="" type="number">
+				</fieldset>
+			</div>
+			<div>
+				<fieldset data-role="controlgroup">
+					<label for="transaction_phone">
+						Enter Phone Number:
+					</label>
+					<input name="" id="transaction_phone" placeholder="" value="" type="tel">
+				</fieldset>
+			</div>
+			<a id="transaction_done" class="ui-disabled" data-role="button" data-theme="a" data-transition="slide" href="#order">
+				NEXT
+			</a>
+		</div>
+	</div>
+	
+	<!-- Order -->
+	<div data-role="page" id="order">
+		<div data-theme="a" data-role="header">
+			<a href="#transaction" data-rel="back">Back</a>
+			<h3>
+				Order
+			</h3>
+		</div>
+		<div data-role="content">
+			
+			<div>
+				<h3>Customer's Account:</h3>
+				
+				<div class="row">
+					<div class="column-left">Current Point Balance</div>
+					<div class="column-right">25pt</div>
+				</div>
+				
+				<div class="row">
+					<div class="column-left">Point Value (4pt=$1)</div>
+					<div class="column-right">$6</div>
+				</div>
+				
+				<div class="clear-both"> </div>
+			</div>
+			
+			<a data-role="button" data-transition="slide" data-theme="a" href="#history">
+				TRANSACTION HISTORY
+			</a>
+			
+			<hr>
+			
+			<div>
+				<h3>Current Transaction:</h3>
+				
+				<div class="row">
+					<div class="column-left">Transaction Total($)</div>
+					<div id="order_total" class="column-right">$100</div>
+				</div>
+				
+				<div class="clear-both"> </div>
+			</div>
+				
+			<ul id="order_plan_list" data-role="listview" data-divider-theme="b" data-inset="true">
+				<li data-theme="a" data-icon="false">
+					<a id="order_plan0" data-transition="slide" href="#confirm_transaction" >
+						<h3>REDEEM ALL POINTS <span class="ui-li-aside">PAY</span></h3>
+						<p>$100-$6=$94(AND EARN 1 PT)<span id="order_price0" class="ui-li-aside">$94</span></p>
+					</a>
+					
+				</li>
+				<li id="order_plan1" data-theme="a" data-icon="false">
+					<a data-transition="slide" href="#confirm_transaction">
+						<h3>NO REDEEM<span class="ui-li-aside">PAY</span></h3>
+						<p>(AND EARN 2 PT)<span id="order_price1" class="ui-li-aside">$100</span></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<!-- Confirm Transaction -->
+	<div data-role="page" id="confirm_transaction">
+		<div data-theme="a" data-role="header">
+			<a href="#order" data-rel="back">Back</a>
+			<h5>
+				CONFIRM TANSACTION
+			</h5>
+		</div>
+		<div data-role="content">
+			
+			<div>
+				<p>Point Redepemption Details:</p>
+					
+				<div class="row">
+					<div class="column-left">Current Point Balance</div>
+					<div class="column-right">25pt</div>
+				</div>
+				
+				<div class="row">
+					<div class="column-left">Point To Be Redeemed</div>
+					<div class="column-right">0pt</div>
+				</div>
+				
+				<div class="row">
+					<div class="column-left">Customer's Discount</div>
+					<div class="column-right">$0</div>
+				</div>
+				<div class="clear-both"> </div>
+			</div>
+			
+			<div>
+				<p>Transaction Details:</p>
+				
+				<div class="row">
+					<div class="column-left">Transaction Total($)</div>
+					<div class="column-right">$100</div>
+				</div>
+				
+				<div class="row">
+					<div class="column-left">Customer's Discount</div>
+					<div class="column-right">$0</div>
+				</div>
+				<div class="clear-both"> </div>
+			</div>
+			
+			<hr>
+			<div>
+				<div class="row">
+					<div class="column-left">Final Total($)</div>
+					<div class="column-right">$100</div>
+				</div>
+				<div class="clear-both"> </div>
+			</div>
+			<hr>
+			<a data-role="button" data-transition="slide" data-theme="a" href="#complete_transaction">
+			COMPLETE TRANSACTION
+			</a>
+		</div>
+	</div>
+	
+	<!-- Transaction complete -->
+	<div data-role="page" id="complete_transaction">
+		<div data-theme="a" data-role="header">
+			<h5>
+				TANSACTION COMPLETED
+			</h5>
+		</div>
+		<div data-role="content">
+			<div>
+				<p>Customer's Account</p>
+				
+				<div class="row">
+					<div class="column-left">Remaining Point Balance</div>
+					<div class="column-right">25pt</div>
+				</div>
+				
+				<div class="row">
+					<div class="column-left">Point Earned</div>
+					<div class="column-right">2pt</div>
+				</div>
+				<div class="clear-both"> </div>
+			</div>
+			
+			<hr>
+			<div>
+				<div class="row">
+					<div class="column-left">New Point Balance</div>
+					<div class="column-right">27pt</div>
+				</div>
+				<div class="clear-both"> </div>
+			</div>
+			<hr>
+			
+			<a data-role="button" data-transition="slide" data-theme="a" href="#transaction">
+			DONE
+			</a>
+		</div>
+	</div>
+	
+	<!-- Transaction History -->
+	<div data-role="page" id="history">
+		<div data-theme="a" data-role="header">
+			<a href="#order" data-rel="back">Back</a>
+			<h5>
+				TANSACTION HISTORY
+			</h5>
+		</div>
+		<div data-role="content">
+			<p>Customer's Transaction History</p>
+		</div>
+	</div>
+
+	<!-- Exchange Rate -->
+	<div data-role="page" id="exchange" class="sliedmain">
+		<div data-theme="a" data-role="header">
+			<a href="javascript:void(0)" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+			<h3>
+				BASIC EXCHANGE RATE
+			</h3>
+		</div>
+		<div data-role="content">
+			<form id="exchange_form">
+				<p>
+					Please set your basic loyalty point exhange rate:
+				</p>
+				
+				<label for="exchange_amount">
+					 Earn 1 point for every
+					<input name="" id="exchange_amount" class="inline" placeholder="amount" value="" type="number" >
+					spent.
+				</label>
+				
+				<p>
+				
+				<label for="exchange_points" class="inline">
+					 Every
+					<input name="" id="exchange_points" class="inline" placeholder="points" value="" type="number" >
+				</label>
+				<label for="exchange_amount2" class="inline">
+					 can discount 
+					<input name="" id="exchange_amount2" class="inline" placeholder="amount" value="" type="number" >
+				</label>
+				</p>
+			</form>
+			
+			<div>
+				<fieldset data-role="controlgroup" data-type="vertical">
+					<input id="exchange_checkbox" name="" type="checkbox">
+					<label for="exchange_checkbox">
+						Turn off basic exchange rate
+					</label>
+				</fieldset>
+			</div>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="selectmenu2">
+				Choose:
+			</label>
+			<select name="">
+				<option value="option1">
+					Option 1
+				</option>
+				<option value="option2">
+					Option 2
+				</option>
+			</select>
+		</div>
+		
+		<a id="exchange_save" class="ui-disabled" data-role="button" data-transition="slide" data-theme="a" href="#transaction">
+			Save
+		</a>
+		
+	</div>
+	
+	<!-- Promotions -->
+	<div data-role="page" id="promotions" class="sliedmain">
+		<div data-theme="a" data-role="header">
+			<a href="javascript:void(0)" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+			<h3>
+				PROMOTIONS
+			</h3>
+			<a href="#new_promotion">NEW</a>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview" data-divider-theme="b" data-inset="false" id="promotionList"></ul>
+			<script id="promotionTmpl" type="text/template">
+				{{=<< >>=}}
+				{{#promotions}}
+					<li data-theme="c" data-icon="false">
+						<a data-transition="slide" promotion_id="{{promotion_id}}">
+							<h3 promotion_id="{{promotion_id}}">{{promotion_name}}</h3>
+							<p promotion_id="{{promotion_id}}">{{promotion_date}}</p>
+							<span class="ui-li-aside">Active</span>
+						</a>
+					</li>
+				{{/promotions}}
+				<<={{ }}=>>
+			</script>
+		</div>
+	</div>
+	
+	<!-- New Promotion -->
+	<div data-role="page" id="new_promotion">
+		<div data-theme="a" data-role="header">
+			<a href="#promotions" data-rel="back">Cancel</a>
+			<h3>
+				NEW PROMOTION
+			</h3>
+		</div>
+		<div data-role="content">
+			<div>
+				<fieldset data-role="controlgroup">
+					<label for="new_promotion_name">
+						Enter the name of the promotion
+					</label>
+					<input name="" id="new_promotion_name" placeholder="" value="" type="text">
+				</fieldset>
+			</div>
+			
+			<form action="">
+				<p>Please set the promotion's points exchange rate:</p>
+				
+				<p>
+					<label for="new_promotion_points" class="inline">
+						 Earn
+					<input name="" id="new_promotion_points" class="inline" placeholder="pt" value="" type="number" >
+					</label>
+					<label for="new_promotion_amount" class="inline">
+						 point for every  
+					<input name="" id="new_promotion_amount" class="inline" placeholder="amount" value="" type="number" >
+						spent.
+					</label>
+				</p>
+				
+				<p>
+					<label for="new_promotion_start_date" class="inline">
+						 Active Between
+					<input name="" id="new_promotion_start_date" class="inline" placeholder="date" value="" type="date" >
+					</label>
+					<label for="new_promotion_end_date" class="inline">
+						 And
+					<input name="" id="new_promotion_end_date" class="inline" placeholder="date" value="" type="date" >
+					</label>
+				</p>
+				
+				<a id="new_promotion_create" class="ui-disabled" data-role="button" data-transition="slide" data-theme="a" href="#promotions">
+					CREATE PROMOTION
+				</a>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

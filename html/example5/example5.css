@@ -1,0 +1,87 @@
+/* 讓Android或iOS裝置在使用者點選時不要HighList */
+* {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* 預設讓頁面隱藏, 等待讀取資料 */
+body { /*  display: none; */
+	margin: 0;
+	padding: 0;
+}
+
+/* 把點點拿掉 */
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	font-size: 2em;
+}
+
+li {
+	border-bottom: 1px solid black;
+	padding: 3px 0px 3px 0px;
+}
+
+/* 示範如何上下左右置中 */
+#message {
+	font-size: 1.5em;
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	text-align: center;
+	line-height: 50%;
+}
+
+#vendorPane {
+	position: absolute;
+	background-color: gray;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 300px;
+	overflow: hidden;
+}
+
+#vendorList {
+	font-size: 2em;
+	text-shadow: black 1px 1px;
+	color: white;
+}
+
+#vendorList li:hover {
+	background-color: #aaaaaa;
+}
+
+#productPane {
+	position: absolute;
+	background-color: #aaaaaa;
+	left: 300px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+
+#productList {
+	font-size: 1.5em;
+}
+
+#productList li:hover {
+	background-color: white;
+}
+
+@media screen and (max-width: 720px) {
+
+	#vendorPane {
+		width: 100%;
+		top: 50px;
+	}
+
+	#productPane {
+		left: -100%;
+		right: auto;
+		width: 100%;
+		top: 50px;
+	}
+
+}

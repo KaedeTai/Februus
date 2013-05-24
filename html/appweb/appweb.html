@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<title>Global Service App web 測試</title>
+	<meta charset="utf-8" />
+	<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<meta name="apple-itunes-app" content="app-id=533068573, affiliate-data=myAffiliateData, app-argument=myURL">
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.mobile-1.2.0.min.js"></script>
+	
+	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+
+	<script type="text/javascript" src="appweb.js"></script>
+		 
+	<link rel="stylesheet" type="text/css" href="/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="appweb.css" />
+
+</head>
+<body>
+	<!-- Home -->
+	<div data-role="page" id="home">
+		<div data-theme="a" data-role="header">
+			<h3>
+				Home
+			</h3>
+		</div>
+		<div data-role="content">
+		
+			<a href="https://play.google.com/store/apps/details?id=com.richi.tw368">
+				<img alt="Android app on Google Play"
+				src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+			</a>
+			
+			<a href="https://itunes.apple.com/tw/app/shi-shang-wan-jia/id533068573?mt=8&uo=4" target="itunes_store">
+				<img alt="iOS app on apple store"
+				src="Available_on_the_App_Store_Badge_US-UK_135x40.png" />
+			</a>
+			
+			<a id="app_btn" data-role="button" href="#">
+				Open Richi App
+			</a>
+		</div>
+	</div>
+
+</body>
+</html>

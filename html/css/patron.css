@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+
+/* 讓Android或iOS裝置在使用者點選時不要HighList */
+* {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* 讓網頁無法選取 */
+body {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust:none;
+	font-family:Helvetica, Arial, Verdana, sans-serif;
+	background-color: #eeeeee;
+}
+
+p {
+	margin: 15px;
+}
+
+label {
+	display: block;
+	color: #555555;
+}
+
+input {
+	width: 100%;
+	border: 1px solid #aaaaaa;
+	border-radius: 5px;
+	font-size: 1em;
+	margin: 0;
+	padding: 3px;
+}
+
+.description {
+	font-size: 0.8em;
+}
+
+button {
+	font-size: 1.2em;
+	width: 100%;
+	border:1px solid #aaaaaa;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-family:arial, helvetica, sans-serif;
+	padding: 5px; 
+	text-align: center;
+	color: #000000;
+	background-color: #f4f5f5;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f5f5), to(#dfdddd));
+	background-image: -webkit-linear-gradient(top, #f4f5f5, #dfdddd);
+	background-image: -moz-linear-gradient(top, #f4f5f5, #dfdddd);
+	background-image: -ms-linear-gradient(top, #f4f5f5, #dfdddd);
+	background-image: -o-linear-gradient(top, #f4f5f5, #dfdddd);
+	background-image: linear-gradient(to bottom, #f4f5f5, #dfdddd);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f4f5f5, endColorstr=#dfdddd);
+}
+
+.hightlight {
+	border: 1px solid red;
+}
+
+/* 把點點拿掉 */
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	font-size: 2em;
+}
+
+li {
+	border-top: 1px solid white;
+	padding: 3px 0px 3px 0px;
+}

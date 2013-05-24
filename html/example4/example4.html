@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+	<head>
+		<title>jQtouch 的 Mobile 範例</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		
+		<script type="text/javascript" src="/js/zepto.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/js/jqtouch.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/js/mustache.js"></script>
+		<script type="text/javascript" src="/js/util.js"></script>
+		<script type="text/javascript" src="example4.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="/css/apple.css" />
+		<link rel="stylesheet" type="text/css" href="example4.css" />
+ 		
+	</head>
+	
+	<body>
+		<div id="jqt">
+			<div id="home" selected="true" section="aside" class="edgetoedge form">
+				<form>
+					<div class="toolbar">
+						<h1>請選擇商家</h1>
+<!--
+						<a href="#add" class="btn2 slideup">Add</a>
+-->
+					</div>
+					<div id="vendorPane">
+						<ul id="vendorList">
+							{{#vendors}}
+							<li><a vendor_id="{{vendor_id}}">{{vendor_name}}</a></li>
+							{{/vendors}}
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+			<div id="step2" class="edit">
+				<form>
+					<div class="toolbar">
+						<h1>請選擇商品</h1>
+						<a href="#" section="full" class="btn2 goback">回上頁</a>
+					</div>
+					<div id="productPane">
+						<ul id="productList"></ul>
+						<script id="productTmpl" type="text/template">
+						{{=<< >>=}}
+							{{#products}}
+							<li product_id="{{product_id}}" amount="{{amount}}">{{product_name}}</li>
+							{{/products}}
+						<<={{ }}=>>
+						</script>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

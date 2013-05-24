@@ -1,0 +1,25 @@
+CACHE MANIFEST
+# web app 20120319 1
+# jQuery 核心
+#/js/jquery.min.js"
+#http://192.168.0.221/js/jquery.min.js
+#http://192.168.0.221/js/jquery.mobile-1.2.0.min.js
+#http://192.168.0.221/js/mustache.js
+#http://192.168.0.221/js/util.js
+
+#http://192.168.0.221/example8/example8.js
+#http://192.168.0.221/example8/record.js
+#http://192.168.0.221/example8/recordWorker.js
+
+#http://192.168.0.221/css/jquery.mobile-1.2.0.min.css
+
+# app 的檔案，位置相對於 HTML 文件
+#images/icons-18-white.png
+#images/icons-18-black.png
+#images/icons-36-white.png
+#images/icons-36-black.png
+#images/ajax-loader.gif
+
+# 需要從網路下載的資源
+NETWORK:
+*

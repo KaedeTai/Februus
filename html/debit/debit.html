@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<title>Patron</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script type="text/javascript" src="/js/lang.js"></script>
+	<script type="text/javascript" src="/js/device.js"></script>
+	<script type="text/javascript" src="debit.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/css/patron.css" />
+	<link rel="stylesheet" type="text/css" href="debit.css" />
+</head>
+<body>
+
+	<label id="name">Name</label>
+		
+	<div id="panel">
+		<label id="amount">0</label>
+	</div>
+	<div id="calculator">
+
+		<div class="table" id="number">
+			<div class="caption">
+				<button id="debit">Debit</button>
+			</div>
+
+			<div class="row">
+				<div class="cell">
+					<button class="number" data-number="7">7</button>
+				</div>
+				<div class="cell">
+					<button class="number" data-number="8">8</button>
+				</div>
+				<div class="cell">
+					<button class="number" data-number="9">9</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell smallbutton">
+					<button class="number" data-number="4">4</button>
+				</div>
+				<div class="cell smallbutton">
+					<button class="number" data-number="5">5</button>
+				</div>
+				<div class="cell smallbutton">
+					<button class="number" data-number="6">6</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell smallbutton">
+					<button class="number" data-number="1">1</button>
+				</div>
+				<div class="cell smallbutton">
+					<button class="number" data-number="2">2</button>
+				</div>
+				<div class="cell smallbutton">
+					<button class="number" data-number="3">3</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell smallbutton">
+					<button class="number" data-number="0">0</button>
+				</div>
+				<div class="cell smallbutton">
+					<button id="point" data-number=".">.</button>
+				</div>
+				<div class="cell smallbutton">
+					<button id="sum" class="operator" data-operator="5">=</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="table" id="symbol">
+			<div class="row">
+				<div class="cell">
+					<button id="clear">clear</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell">
+					<button id="div" class="operator" data-operator="4">/</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell">
+					<button id="mul" class="operator" data-operator="3">*</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell">
+					<button id="sub" class="operator" data-operator="2">-</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell">
+					<button id="add" class="operator" data-operator="1">+</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

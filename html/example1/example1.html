@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<base href="/example1/" />
+	<title>Responsive Design</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/iscroll.js"></script>
+	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script type="text/javascript" src="/js/lang.js"></script>
+	<script type="text/javascript" src="example1.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="example1.css" />
+</head>
+<body>
+	<div id="step1" class="title">
+		<span id="title1">請選擇廠商</span>
+	</div>
+	<div id="step2" class="title">
+		<a id="back">&lt;</a>
+		<span id="title2">請選擇商品</span>
+	</div>
+	<div id="vendorPane">
+		<ul id="vendorList">
+			{{#vendors}}
+			<li vendor_id="{{vendor_id}}" dict="{{vendor_dict}}">{{vendor_name}}</li>
+			{{/vendors}}
+		</ul>
+	</div>
+	<div id="productPane">
+		<ul id="productList"></ul>
+		<script id="productTmpl" type="text/template">
+		{{=<< >>=}}
+			{{#products}}
+			<li product_id="{{product_id}}" dict="{{product_dict}}" amount="{{amount}}">{{product_name}}</li>
+			{{/products}}
+		<<={{ }}=>>
+		</script>
+		<div id="message" class="center">
+			<span id="choose">選擇語言:</span>
+			<select id="lang" />
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+	<head>
+		<title>jQtouch 的 Responsive Design 範例</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		
+		<script type="text/javascript" src="/js/zepto.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/js/jqtouch.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/js/mustache.js"></script>
+		<script type="text/javascript" src="/js/util.js"></script>
+		<script type="application/javascript" src="iscroll/iscroll.js" charset="utf-8"></script>
+		<script type="text/javascript" src="example6.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="jqtouch/jqtouch.css" />
+		<!-- 使用原作者的 apple/theme.css 會無法 scroll -->
+		<link rel="stylesheet" type="text/css" href="/css/apple.css" />
+		<link rel="stylesheet" type="text/css" href="example6.css" />
+ 		
+	</head>
+	
+	<body>
+		<div id="jqt" class="splitscreen">
+			<div id="menu" selected="true" section="aside" class="edgetoedge form current">
+				<form>
+					<div class="toolbar">
+						<h1>請選擇商家</h1>
+<!--
+						<a href="#add" class="btn2 slideup">Add</a>
+-->
+					</div>
+					<div id="vendorPane">
+						<ul id="vendorList">
+							{{#vendors}}
+							<li><a vendor_id="{{vendor_id}}">{{vendor_name}}</a></li>
+							{{/vendors}}
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+			<div id="content" class="edit" >
+				<form>
+					<div class="toolbar">
+						<h1>請選擇商品</h1>
+						<a href="#menu" class="btn2">回上頁</a>
+					</div>
+					<div id="productPane">
+						<ul id="productList"></ul>
+						<script id="productTmpl" type="text/template">
+						{{=<< >>=}}
+							{{#products}}
+							<li product_id="{{product_id}}" amount="{{amount}}">{{product_name}}</li>
+							{{/products}}
+						<<={{ }}=>>
+						</script>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

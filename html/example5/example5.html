@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<title>jQuery Mobile 的 Responsive Design 範例</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no" />
+	
+	<link rel="stylesheet" type="text/css" href="/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/jquery.mobile.splitview.css" />
+	<link rel="stylesheet" type="text/css" href="/css/jquery.mobile.grids.collapsible.css" />
+	
+	<!-- 
+		splitview.js 要在 jquery.mobile.js 前面
+		jquery.mobile.js 目前只能用 spliteview 作者提供版本
+	-->
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.mobile.splitview.js"></script>
+	<script type="text/javascript" src="jquery.mobile.js"></script>
+	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script type="text/javascript" src="/js/lang.js"></script>
+	<script type="text/javascript" src="example5.js"></script>
+	
+</head>
+<body>
+	<div data-role="panel" data-id="menu" data-hash="crumbs" data-context="a#default">
+		<!-- Home -->
+		<div data-role="page" id="vendorPane" data-hash="false">
+			
+			<div data-theme="a" data-role="header" data-position="fixed">
+				<h3>廠商列表</h3>
+			</div>
+			
+			<div data-role="content">
+				<ul data-role="listview" data-divider-theme="b" data-inset="true" id="vendorList">
+					<li data-role="list-divider" role="heading">請選擇商家</li>
+					<li><a href="#demoPane">切換 Menu</a></li>
+					{{#vendors}}
+					<li data-theme="c">
+						<a href="#productPane" data-panel="main" vendor_id="{{vendor_id}}"  dict="{{vendor_dict}}">{{vendor_name}}</a>
+					</li>
+					{{/vendors}}
+				</ul>
+			</div>
+			
+		</div>
+		
+		<div data-role="page" id="demoPane">
+			
+			<div data-theme="a" data-role="header">
+				<h3>page2</h3>
+			</div>
+			
+			<div data-role="content">
+				<ul data-role="listview" data-divider-theme="b" data-inset="true" id="demoList">
+					<li><a href="#vendorPane">返回廠商列表</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+					<li><a href="#badz" data-panel="main" >bla</a></li>
+				</ul>
+			</div>
+			
+		</div>
+		
+	</div><!-- panel menu -->
+	
+	<div data-role="panel" data-id="main">
+		
+		<div data-role="page" id="productPane">
+			
+			<div data-theme="a" data-role="header">
+				<a href="#vendorPane" data-rel="back">Back</a>
+				<h3>產品資訊</h3>
+			</div>
+			
+			<div data-role="content">
+				<ul data-role="listview" data-divider-theme="b" data-inset="true" id="productList"></ul>
+				<script id="productTmpl" type="text/template">
+				<li data-role="list-divider" role="heading">請選擇商品</li>
+				{{=<< >>=}}
+				{{#products}}
+				<li data-theme="c">
+				<a href="#vendorPane" product_id="{{product_id}}" dict="{{product_dict}}" amount="{{amount}}">{{product_name}}</a>
+				</li>
+				{{/products}}
+				<<={{ }}=>>
+				</script>
+				
+				<div id="message">
+					<span id="choose">選擇語言:</span>
+					<select id="lang"> </select>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<!-- Start of 5th page -->
+		<div data-role="page" id="badz">
+			
+			
+			
+		</div><!-- /page -->
+		
+		<!-- Start of 5th page -->
+		<div data-role="page" id="badz1">
+			
+			<div data-role="header">
+				<h1>測試標題</h1>
+			</div><!-- /header -->
+			
+			<div data-role="content"> 
+				<h3>測試</h3>
+				<p>測試資料中</p>
+			</div><!-- /content -->
+			
+		</div><!-- /page -->
+		
+	</div><!-- main menu -->
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<title>Book</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script type="text/javascript" src="/js/lang.js"></script>
+	<script type="text/javascript" src="/js/device.js"></script>
+	<script type="text/javascript" src="book.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/css/patron.css" />
+	<link rel="stylesheet" type="text/css" href="book.css" />
+</head>
+<body>
+
+	<label id="name">&nbsp;</label>
+		
+	<div id="notTransTab">
+		<p>
+		</p>
+		<p>
+			<label id="notTrans">
+			The account hsa no credit yet,
+			please tap the save button below to depostit some.
+			尚未有任何交易
+			</label>
+		</p>
+	</div>
+	
+	<div id="panel">
+		<label id="total">餘額</label>
+		<label id="balance">&nbsp;</label>
+	</div>
+
+	<div id="recentTab">
+		<label id="recent">最新交易</label>
+		<ul id="transList"></ul>
+		<script id="transTmpl" type="text/template">
+		{{#trans}}
+			<li>
+				<div class="record">
+					<label class="amount">{{amount}}</label>
+					<label class="ts">{{ts}}</label>
+				</div>
+			</li>
+		{{/trans}}
+		</script>
+		<button id="more">顯示更多</button>
+	</div>
+
+	<div id="spacer"></div>
+
+	<div id="fixed">
+		<div class="ui-block"><button id="debit">Debit</button></div>
+		<div class="ui-block"><button id="topup">topup</button></div>
+	</div>
+</body>
+</html>

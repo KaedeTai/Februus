@@ -1,0 +1,1 @@
+ssh wenkai@192.168.0.221 "cd /var/www/rd/test && phpunit $1"

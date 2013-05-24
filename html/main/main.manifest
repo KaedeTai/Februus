@@ -1,0 +1,26 @@
+CACHE MANIFEST
+# VERSION 0.1 2013/04/30
+
+# 直接缓存的文件
+CACHE:
+
+# javascript
+http://192.168.0.221/js/jquery.min.js
+http://192.168.0.221/js/mustache.js
+http://192.168.0.221/js/util.js
+http://192.168.0.221/main/main.js 
+
+# css
+http://192.168.0.221/css/reset.css
+http://192.168.0.221/css/patron.css
+http://192.168.0.221/main/main.css
+
+# image 
+#images/icons-18-white.png
+
+# 替代方案
+FALLBACK:
+
+# 需要從網路下載的資源
+NETWORK:
+*

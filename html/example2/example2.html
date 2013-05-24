@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<title>Responsive Design</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/iscroll.js"></script>
+	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script type="text/javascript" src="example2.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="example2.css" />
+</head>
+<body>
+	<div id="step1" class="title">
+		請選擇廠商
+	</div>
+	<div id="step2" class="title">
+		<a id="back">&lt;</a>
+		請選擇商品
+	</div>
+	<div id="vendorPane">
+		<ul id="vendorList">
+			{{#vendors}}
+			<li vendor_id="{{vendor_id}}">{{vendor_name}}</li>
+			{{/vendors}}
+		</ul>
+	</div>
+	<div id="productPane">
+		<ul id="productList"></ul>
+		<script id="productTmpl" type="text/template">
+		{{=<< >>=}}
+			{{#products}}
+			<li product_id="{{product_id}}" amount="{{amount}}">{{product_name}}</li>
+			{{/products}}
+		<<={{ }}=>>
+		</script>
+		<div id="message" class="center">請先選擇廠商</div>
+	</div>
+</body>
+</html>

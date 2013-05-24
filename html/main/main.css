@@ -1,0 +1,88 @@
+@CHARSET "UTF-8";
+
+#fixed {
+	position: fixed;
+	top: 0;
+	z-index: 1;
+	width: 100%;
+	background-color: #cccccc;
+}
+
+#search {
+	font-size: 1.2em;
+}
+
+#recent {
+	background-color: #aaaaaa;
+	padding: 2px;
+}
+
+.account {
+	position: relative;
+	margin: 5px 10px 5px 10px;
+}
+
+.account .balance {
+	position: absolute;
+	top: 5px;
+	color: #333333;
+	fontt-size: 1.2em;
+}
+
+.account .ts {
+	position: relative;
+	top: 0;
+	right: 0;
+	text-align: right;
+	font-size: 0.6em;
+	color: #333333;
+}
+
+.account .name {
+	position: relative;
+	top: 5px;
+	right: 0;
+	text-align: right;
+	font-size: 0.8em;
+	color: #333333;
+}
+
+#more {
+	display: none;
+}
+
+#resultTab {
+	display: none;
+}
+
+.result {
+	position: relative;
+	margin: 5px 10px 5px 10px;
+}
+
+.result .name {
+	position: relative;
+	font-size: 1.2em;
+	color: #333333;
+}
+
+.result .email {
+	position: relative;
+	font-size: 0.8em;
+	color: #333333;
+}
+
+.result .phone {
+	position: relative;
+	font-size: 0.8em;
+	color: #333333;
+}
+
+#notfound {
+	display: none;
+}
+
+.mark {
+	background-color: #333333;
+	color: #aaaaaa;
+}
