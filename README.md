@@ -18,4 +18,6 @@ The philosophy of Februus is:
 * Follow all the recent or future standards
 * Design your software with a fully-functional-mockup
 
+This project is quite immature and under construction, so the information and documents may not be sufficient. Please take a look at html/example1/ and html/hankyu/ to see how it works.
+
 Sponsored by Richi Inc.
