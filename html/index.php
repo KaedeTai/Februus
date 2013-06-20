@@ -1,8 +1,8 @@
 <?php
 
 require '../config.php';
-require 'mysql.php';
 require 'util.php';
+require 'febric.php';
 require 'phptop.php';
 
 #echo $_SERVER['REQUEST_URI'];exit;
@@ -36,16 +36,40 @@ is_callable("$module::$action") or home();
 $m = new $module;
 try {
 	session_start();
+	header('Access-Control-Allow-Origin: *');
 	$r = $m->$action();
 }
+catch (RequestException $e) {
+	//debug only
+	jsonp(array(
+		'error'   => $e->getCode(),
+		'message' => $e->getMessage(),
+	));
+	exit;
+}
+catch (ActionException $e) {
+	jsonp(array(
+		'error'   => $e->getCode(),
+		'message' => $e->getMessage(),
+	));
+	exit;
+}
 catch (Exception $e) {
-	return json_encode(array(
+	jsonp(array(
 		'error'   => $e->getCode(),
 		'message' => $e->getMessage(),
 		'trace'   => $e->getTrace(),
 	));
+	exit;
 }
-echo is_array($r)? json_encode($r): $r;
+if (is_array($r)) {
+	$r['error'] = 0;
+	$r['message'] = '成功';
+	jsonp($r);
+}
+else {
+	echo $r;
+}
 
 function home() {
 #	header('Location: /');

@@ -63,9 +63,9 @@ $(function() {
 	productScroll = scroller('productPane');
 });
 
-function showProducts(products) {
+function showProducts(json) {
 	//Render product list
-	render('#productList', '#productTmpl', {products: products});
+	render('#productList', '#productTmpl', json);
 
 	//Refresh iScroll object
 	productScroll.refresh();

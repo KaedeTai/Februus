@@ -12,6 +12,7 @@ class FatalException extends Exception {
 		file_put_contents(LOG_PATH . '/fatal.log', date('Y-m-d H:i:s') . "\t$error\t$message\n", FILE_APPEND);
 	}
 }
+
 class SQLException extends Exception {
 	public function __construct($message = 'SQL', $error = -99)
 	{
@@ -19,34 +20,37 @@ class SQLException extends Exception {
 		file_put_contents(LOG_PATH . '/sql.log', date('Y-m-d H:i:s') . "\t$error\t$message\n", FILE_APPEND);
 	}
 }
+
 class NetworkException extends Exception 
 {
-		protected $msg;
-		public function __construct($error = -99, $message = '系統忙碌中請稍後再試')
-		{
-				$this->msg = $message;
-				parent::__construct($message, $error);
-				file_put_contents(LOG_PATH . '/network.log', date('Y-m-d H:i:s') . "\t$error\t$message\n", FILE_APPEND);
-		}
-		public function getMsg()
-		{
-				return $this->msg;
-		}
+	protected $msg;
+	public function __construct($error = -99, $message = '系統忙碌中請稍後再試')
+	{
+		$this->msg = $message;
+		parent::__construct($message, $error);
+		file_put_contents(LOG_PATH . '/network.log', date('Y-m-d H:i:s') . "\t$error\t$message\n", FILE_APPEND);
+	}
+	public function getMsg()
+	{
+		return $this->msg;
+	}
 }
+
 class RequestException extends Exception 
 {
-		protected $msg;
-		public function __construct($error = -99, $message = '系統忙碌中請稍後再試')
-		{
-				$this->msg = $message;
-				parent::__construct($message, $error);
-				file_put_contents(LOG_PATH . '/req.log', date('Y-m-d H:i:s') . "\t$error\t$message\n", FILE_APPEND);
-		}
-		public function getMsg()
-		{
-				return $this->msg;
-		}
+	protected $msg;
+	public function __construct($error = -99, $message = '系統忙碌中請稍後再試')
+	{
+		$this->msg = $message;
+		parent::__construct($message, -99);
+		file_put_contents(LOG_PATH . '/req.log', date('Y-m-d H:i:s') . "\t$error\t$message\n", FILE_APPEND);
+	}
+	public function getMsg()
+	{
+		return $this->msg;
+	}
 }
+
 class ActionException extends Exception
 {
 	protected $msg;
@@ -94,13 +98,13 @@ function _REQ($name, $pattern = null, $errno = null, $errmsg = null)
 			return '';
 		if (isset($errno))
 			throw new ActionException($errno, $errmsg);
-		throw new RequestException("Undefine variable $name");
+		throw new RequestException(-99, "Undefine variable $name");
 	}
 	if (!isset($pattern) || preg_match($pattern, $_REQUEST[$name]))
 		return $_REQUEST[$name];
 	if (isset($errno))
 		throw new ActionException($errno, $errmsg);
-	throw new RequestException("Pattern not matched $name $pattern");
+	throw new RequestException(-99, "Pattern not matched $name $pattern");
 }
 
 //從$_GET取出值並驗證格式
@@ -112,13 +116,13 @@ function _GET($name, $pattern = null, $errno = null, $errmsg = null)
 			return '';
 		if (isset($errno))
 			throw new ActionException($errno, $errmsg);
-		throw new RequestException("Undefine variable $name");
+		throw new RequestException(-99, "Undefine variable $name");
 	}
 	if (!isset($pattern) || preg_match($pattern, $_GET[$name]))
 		return $_GET[$name];
 	if (isset($errno))
 		throw new ActionException($errno, $errmsg);
-	throw new RequestException("Pattern not matched $name $pattern");
+	throw new RequestException(-99, "Pattern not matched $name $pattern");
 }
 
 //從$_POST取出值並驗證格式
@@ -130,13 +134,13 @@ function _POST($name, $pattern = null, $errno = null, $errmsg = null)
 			return '';
 		if (isset($errno))
 			throw new ActionException($errno, $errmsg);
-		throw new RequestException("Undefine variable $name");
+		throw new RequestException(-99, "Undefine variable $name");
 	}
 	if (!isset($pattern) || preg_match($pattern, $_POST[$name]))
 		return $_POST[$name];
 	if (isset($errno))
 		throw new ActionException($errno, $errmsg);
-	throw new RequestException("Pattern not matched $name $pattern");
+	throw new RequestException(-99, "Pattern not matched $name $pattern");
 }
 
 //組成xml or json
@@ -199,14 +203,16 @@ function query($sql)
 	//Compose SQL
 	$args = func_get_args();
 	$a = explode('?', $sql);
-	for ($i = 1; $i < count($args); $i ++)
+	for ($i = 1; $i < count($args); $i ++) {
 		$a[$i - 1] .= "'" . mysql_real_escape_string($args[$i]) . "'";
+	}
 	$sql = implode('', $a);
 
 	$rs = mysql_query($sql);
 	$err = mysql_error();
-	if ($err != '')
-		throw new SQLException($err.$sql);
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
 	return $rs;
 }
 
@@ -221,69 +227,34 @@ function insert($sql)
 
 	mysql_query($sql);
 	$err = mysql_error();
-	if ($err != '')
-		throw new SQLException("$sql $err");
-	if (mysql_affected_rows() == 0)
-		throw new SQLException($sql.$sql);
-	$id = mysql_insert_id();
-	if (!$id)
-		return true;
-	return $id;
-}
-
-function insertRow($table, $map, $replace = false)
-{
-	$fields = array();
-	$values = array();
-	foreach ($map as $field => $value)
-	{
-		$fields[] = $field;
-		$values[] = mysql_real_escape_string($value);
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
 	}
-	$sql = ($replace? 'REPLACE': 'INSERT') . " INTO `$table` (`" . implode('`,`', $fields) . "`) VALUES ('" . implode("','", $values) . "')";
-	mysql_query($sql);
-	$err = mysql_error();
-	if ($err != '')
-		throw new SQLException("$sql $err");
-	if (mysql_affected_rows() == 0)
-		throw new SQLException($sql.$sql);
+	if (mysql_affected_rows() == 0) {
+		throw new SQLException("Insert failed: $sql");
+	}
 	$id = mysql_insert_id();
-	if (!$id)
+	if (!$id) {
 		return true;
+	}
 	return $id;
 }
-
-
-function updateRow($table, $map, $where = '')
-{
-	$fields = array();
-	$values = array();
-	$sql = "UPDATE $table SET ";
-	foreach ($map as $field => $value)
-		$sql .= "`$field`='" . mysql_real_escape_string($value) . "', ";
-	
-
-	$sql = substr($sql, 0, -2) . ($where? " WHERE $where" : "");
-#echo $sql;
-#exit;
-	return update($sql);
-}
-
 
 function update($sql)
 {
 	//Compose SQL
 	$args = func_get_args();
 	$a = explode('?', $sql);
-	for ($i = 1; $i < count($args); $i ++)
+	for ($i = 1; $i < count($args); $i ++) {
 		$a[$i - 1] .= "'" . mysql_real_escape_string($args[$i]) . "'";
+	}
 	$sql = implode('', $a);
-	
 
 	mysql_query($sql);
 	$err = mysql_error();
-	if ($err != '')
-		throw new SQLException($err.$sql);
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
 	return mysql_affected_rows();
 }
 
@@ -293,19 +264,22 @@ function queryRow($sql)
 	//Compose SQL
 	$args = func_get_args();
 	$a = explode('?', $sql);
-	for ($i = 1; $i < count($args); $i ++)
+	for ($i = 1; $i < count($args); $i ++) {
 		$a[$i - 1] .= "'" . mysql_real_escape_string($args[$i]) . "'";
+	}
 	$sql = implode('', $a);
 
 	$rs = mysql_query("$sql LIMIT 1");
 	$err = mysql_error();
-	if ($err != '')
-		throw new SQLException($err.$sql);
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
 	if ($a = mysql_fetch_array($rs))
 	{
 		$len = count($a);
-		for ($i = 0; $i < $len / 2; $i ++)
+		for ($i = 0; $i < $len / 2; $i ++) {
 			unset($a[$i]);
+		}
 		return $a;
 	}
 	return false;
@@ -317,21 +291,24 @@ function queryArray($sql)
 	//Compose SQL
 	$args = func_get_args();
 	$a = explode('?', $sql);
-	for ($i = 1; $i < count($args); $i ++)
+	for ($i = 1; $i < count($args); $i ++) {
 		$a[$i - 1] .= "'" . mysql_real_escape_string($args[$i]) . "'";
+	}
 	$sql = implode('', $a);
 
 	$rs = mysql_query($sql);
 	$err = mysql_error();
-	if ($err != '')
-		throw new SQLException($err.$sql);
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
 	$arr = array();
 	while ($a = mysql_fetch_array($rs))
 	{
 		$len = count($a);
-		for ($i = 0; $i < $len / 2; $i ++)
+		for ($i = 0; $i < $len / 2; $i ++) {
 			unset($a[$i]);
-			$arr[] = $a;
+		}
+		$arr[] = $a;
 	}
 	return $arr;
 }
@@ -342,24 +319,146 @@ function queryHash($key, $sql)
 	//Compose SQL
 	$args = func_get_args();
 	$a = explode('?', $sql);
-	for ($i = 2; $i < count($args); $i ++)
+	for ($i = 2; $i < count($args); $i ++) {
 		$a[$i - 2] .= "'" . mysql_real_escape_string($args[$i]) . "'";
+	}
 	$sql = implode('', $a);
 
 	$rs = mysql_query($sql);
 	$err = mysql_error();
-	if ($err != '')
-		throw new SQLException($err.$sql);
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
 	$arr = array();
 	while ($a = mysql_fetch_array($rs))
 	{
 		$len = count($a);
-		for ($i = 0; $i < $len / 2; $i ++)
+		for ($i = 0; $i < $len / 2; $i ++) {
 			unset($a[$i]);
+		}
 		$arr[strval($a[$key])] = $a;
 	}
 	return $arr;
 }
+
+//取得一行資料
+function getRow($table, $where, $fields = '*', $must = false)
+{
+	if (is_array($where)) {
+		$a = array();
+		foreach ($where as $field => $value) {
+			$a[] = "`$field`='" . mysql_real_escape_string($value) . "'";
+		}
+		$where = implode(' AND ', $a);
+	}
+	if ($where == '') {
+		throw new SQLException("\$where cannot be empty!");
+	}
+
+	$rs = mysql_query("SELECT $fields FROM `$table` WHERE $where LIMIT 1");
+	$err = mysql_error();
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
+	if ($a = mysql_fetch_array($rs)) {
+		$len = count($a);
+		for ($i = 0; $i < $len / 2; $i ++) {
+			unset($a[$i]);
+		}
+		return $a;
+	}
+	if ($must) {
+		throw new SQLException("Select failed: $sql");
+	}
+	return false;
+}
+
+//新增一行資料
+function addRow($table, $map, $replace = false)
+{
+	$fields = array();
+	$values = array();
+	foreach ($map as $field => $value) {
+		$fields[] = $field;
+		$values[] = mysql_real_escape_string($value);
+	}
+	$sql = ($replace? 'REPLACE': 'INSERT') . " INTO `$table` (`" . implode('`,`', $fields) . "`) VALUES ('" . implode("','", $values) . "')";
+	mysql_query($sql);
+	$err = mysql_error();
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
+	if (mysql_affected_rows() == 0) {
+		throw new SQLException("Insert failed: $sql");
+	}
+	$id = mysql_insert_id();
+	if (!$id) {
+		return true;
+	}
+	return $id;
+}
+
+//設定一行資料
+function setRow($table, $where, $set, $must = false)
+{
+	if (is_array($where)) {
+		$a = array();
+		foreach ($where as $field => $value) {
+			$a[] = "`$field`='" . mysql_real_escape_string($value) . "'";
+		}
+		$where = implode(' AND ', $a);
+	}
+	if ($where == '') {
+		throw new SQLException("\$where cannot be empty!");
+	}
+	if (is_array($set)) {
+		$a = array();
+		foreach ($set as $field => $value)
+			$a[] = "`$field`='" . mysql_real_escape_string($value) . "'";
+		$set = implode(',', $a);
+	}
+	if ($set == '') {
+		throw new SQLException("\$set cannot be empty!");
+	}
+
+	mysql_query("UPDATE `$table` SET $set WHERE $where");
+	$err = mysql_error();
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
+	$affected = mysql_affected_rows();
+	if ($must && $affected == 0) {
+		throw new SQLException("Update failed: $sql");
+	}
+	return $affected;
+}
+
+//設定一行資料
+function delRow($table, $where, $must = false)
+{
+	if (is_array($where)) {
+		$a = array();
+		foreach ($where as $field => $value) {
+			$a[] = "`$field`='" . mysql_real_escape_string($value) . "'";
+		}
+		$where = implode(' AND ', $a);
+	}
+	if ($where == '') {
+		throw new SQLException("\$where cannot be empty!");
+	}
+
+	mysql_query("DELETE FROM `$table` WHERE $where");
+	$err = mysql_error();
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
+	$affected = mysql_affected_rows();
+	if ($must && $affected == 0) {
+		throw new SQLException("Delete failed: $sql");
+	}
+	return $affected;
+}
+
 //寄信
 function sendMail($email, $title, $text, $from = 'Richi Inc. <email@richimail.com>')
 {
@@ -460,7 +559,7 @@ function jsonp($object)
 
 	if(isset($_GET['callback']))
 		echo $_GET['callback']."(";
-	echo json_encode($object, JSON_FORCE_OBJECT);
+	echo json_encode($object);
 	if(isset($_GET['callback']))
 		echo ");";
 	exit;

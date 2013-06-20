@@ -20,6 +20,16 @@ $(function() {
 	L();
 
 	showInfo();
+	
+	$('#debit').click(function () {
+		location.href = '../debit/debit.html';
+	});
+	$('#topup').click(function () {
+		location.href = '../topup/topup.html';
+	});
+	  
+	
+
 });
 
 function showInfo() {
@@ -65,7 +75,11 @@ function find(json) {
 	var results = [];
 	for (i in json.trans) {
 		var a = json.trans[i];
-		a.amount = '$' + fmoney(a.amount);
+		var type = '';
+		if (a.type > 0) {
+			type = ' + ';
+		}
+		a.amount = type + '$' + fmoney(a.amount);
 		results.push(a);
 	}
 	return results;
