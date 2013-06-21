@@ -274,15 +274,7 @@ function queryRow($sql)
 	if ($err != '') {
 		throw new SQLException("Error: $err. SQL: $sql");
 	}
-	if ($a = mysql_fetch_array($rs))
-	{
-		$len = count($a);
-		for ($i = 0; $i < $len / 2; $i ++) {
-			unset($a[$i]);
-		}
-		return $a;
-	}
-	return false;
+	return mysql_fetch_assoc($rs);
 }
 
 //function queryArray($sql, ...)
@@ -302,12 +294,7 @@ function queryArray($sql)
 		throw new SQLException("Error: $err. SQL: $sql");
 	}
 	$arr = array();
-	while ($a = mysql_fetch_array($rs))
-	{
-		$len = count($a);
-		for ($i = 0; $i < $len / 2; $i ++) {
-			unset($a[$i]);
-		}
+	while ($a = mysql_fetch_assoc($rs)) {
 		$arr[] = $a;
 	}
 	return $arr;
@@ -330,12 +317,7 @@ function queryHash($key, $sql)
 		throw new SQLException("Error: $err. SQL: $sql");
 	}
 	$arr = array();
-	while ($a = mysql_fetch_array($rs))
-	{
-		$len = count($a);
-		for ($i = 0; $i < $len / 2; $i ++) {
-			unset($a[$i]);
-		}
+	while ($a = mysql_fetch_assoc($rs)) {
 		$arr[strval($a[$key])] = $a;
 	}
 	return $arr;
@@ -360,11 +342,7 @@ function getRow($table, $where, $fields = '*', $must = false)
 	if ($err != '') {
 		throw new SQLException("Error: $err. SQL: $sql");
 	}
-	if ($a = mysql_fetch_array($rs)) {
-		$len = count($a);
-		for ($i = 0; $i < $len / 2; $i ++) {
-			unset($a[$i]);
-		}
+	if ($a = mysql_fetch_assoc($rs)) {
 		return $a;
 	}
 	if ($must) {
