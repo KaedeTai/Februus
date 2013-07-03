@@ -18,6 +18,17 @@ The philosophy of Februus is:
 * Follow all the recent or future standards
 * Design your software with a fully-functional-mockup
 
+Let's see how easy a "febric" can be:
+
+    class api extends Febric {
+        public function getItem() {
+            $item_id = _REQ('item_id', RE_NUM); // $item_id must be a nature number
+            return getRow('item', array('item_id' => $item_id));
+        }
+    }
+We will get the following by calling http://domain.name/api/getItem?item_id=123
+`{"item_id":"123","name":"\u9bae\u5976\u8336","is_set":"0","price":"35","set_price":"15","error":0,"message":"\u6210\u529f"}`
+
 This project is quite immature and under construction, so the information and documents may not be sufficient. Please take a look at html/example1/ and html/hankyu/ to see how it works.
 
 Sponsored by Richi Inc.
