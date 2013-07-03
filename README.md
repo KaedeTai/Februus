@@ -1,9 +1,9 @@
 Februus
 =======
 
-A purified framework for web &amp; mobile development, which allow us to "febricate" software products quickly but also have good quality. Named after Februus, the Roman God of Purification.
+A purified framework for web &amp; mobile development, which allow us to *febricate* software products quickly but also have good quality. Named after Februus, the Roman God of Purification.
 
-The project eventually will support as many languages as possible. The first Language supported is PHP, which is called "phebruus".
+The project eventually will support as many languages as possible. The first Language supported is PHP, which is called *phebruus*.
 
 The philosophy of Februus is:
 * Don't reinvent the wheel, utilize all the existing solutions.
@@ -18,7 +18,7 @@ The philosophy of Februus is:
 * Follow all the recent or future standards
 * Design your software with a fully-functional-mockup
 
-Let's see how easy a "febric" can be:
+Let's see how easy a *febric* can be:
 
     class api extends Febric {
         public function getItem() {
@@ -27,7 +27,7 @@ Let's see how easy a "febric" can be:
         }
     }
 
-We will get the following JSON by calling http://domain.name/api/getItem?item_id=123
+We will get the following JSON by calling http://domain.name.or.ip/api/getItem?item_id=123
 
     {"item_id":"123","kind_id":"2","name":"Coffee","is_hot":"0","price":"35","error":0,"message":"Success"}
 
