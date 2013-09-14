@@ -5,6 +5,25 @@
  * Lots of things TODO
  */
 
+/**
+ * 設定 Regular Expression 常用 Pattern
+ */
+define('RE_EMAIL',  '/^[0-9a-z._-]+@[0-9a-z_-]+(\.[0-9a-z_-]+)+$/i');
+define('RE_DATE',   '/^(19|20)[0-9]{2}[\/-][01][0-9][\/-][0-3][0-9]$/');
+define('RE_TIME',   '/^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/');
+define('RE_TS',     '/^(19|20)[0-9]{2}[\/-][01][0-9][\/-][0-3][0-9] ([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/');
+define('RE_PHONE',  '/^[0-9-]+$/');
+define('RE_IDNO',   '/^[A-Z][0-9]{9}$/');
+define('RE_INT',    '/^(-?[1-9]|0)[0-9]*$/');
+define('RE_NUM',    '/^[1-9][0-9]*$/');
+define('RE_NUMSTR', '/^[0-9]+$/');
+define('RE_01',     '/^(0|1)$/');
+define('RE_STR',    '/.+/');
+
+/**
+ * 定義意外
+ */
+
 class FatalException extends Exception {
 	public function __construct($message = 'Fatal', $error = -99)
 	{
@@ -277,6 +296,29 @@ function queryRow($sql)
 	return mysql_fetch_assoc($rs);
 }
 
+//function queryColumn($sql, ...)
+function queryColumn($sql)
+{
+	//Compose SQL
+	$args = func_get_args();
+	$a = explode('?', $sql);
+	for ($i = 1; $i < count($args); $i ++) {
+		$a[$i - 1] .= "'" . mysql_real_escape_string($args[$i]) . "'";
+	}
+	$sql = implode('', $a);
+
+	$rs = mysql_query($sql);
+	$err = mysql_error();
+	if ($err != '') {
+		throw new SQLException("Error: $err. SQL: $sql");
+	}
+	$arr = array();
+	while ($row = mysql_fetch_row($rs)) {
+		$arr[] = $row[0];
+	}
+	return $arr;
+}
+
 //function queryArray($sql, ...)
 function queryArray($sql)
 {
@@ -337,7 +379,8 @@ function getRow($table, $where, $fields = '*', $must = false)
 		throw new SQLException("\$where cannot be empty!");
 	}
 
-	$rs = mysql_query("SELECT $fields FROM `$table` WHERE $where LIMIT 1");
+	$sql = "SELECT $fields FROM `$table` WHERE $where LIMIT 1";
+	$rs = mysql_query($sql);
 	$err = mysql_error();
 	if ($err != '') {
 		throw new SQLException("Error: $err. SQL: $sql");

@@ -41,6 +41,7 @@ try {
 }
 catch (RequestException $e) {
 	//debug only
+	mysql_rollback();
 	jsonp(array(
 		'error'   => $e->getCode(),
 		'message' => $e->getMessage(),
@@ -48,6 +49,7 @@ catch (RequestException $e) {
 	exit;
 }
 catch (ActionException $e) {
+	mysql_rollback();
 	jsonp(array(
 		'error'   => $e->getCode(),
 		'message' => $e->getMessage(),
@@ -55,6 +57,7 @@ catch (ActionException $e) {
 	exit;
 }
 catch (Exception $e) {
+	mysql_rollback();
 	jsonp(array(
 		'error'   => $e->getCode(),
 		'message' => $e->getMessage(),
@@ -63,8 +66,12 @@ catch (Exception $e) {
 	exit;
 }
 if (is_array($r)) {
-	$r['error'] = 0;
-	$r['message'] = '成功';
+	if (!isset($r['error'])) {
+		$r['error'] = 0;
+	}
+	if (!isset($r['message'])) {
+		$r['message'] = '成功';
+	}
 	jsonp($r);
 }
 else {
