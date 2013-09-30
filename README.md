@@ -1,9 +1,9 @@
-Februus
+febric
 =======
 
-A purified framework for web &amp; mobile development, which allow us to **febricate** software products quickly but also have good quality. Named after Februus, the Roman God of Purification.
+A purified framework for web &amp; mobile development, which allow us to **febricate** software products quickly but also have good quality. Named after **Februus**, the Roman God of Purification. (also the origin of Febrary)
 
-The project eventually will support as many languages as possible. The first Language supported is PHP, which is called **phebruus**.
+The project eventually will support as many languages as possible. The first Language supported is PHP, which is called **phebric**.
 
 The philosophy of Februus is:
 * Don't reinvent the wheel, utilize all the existing solutions.
