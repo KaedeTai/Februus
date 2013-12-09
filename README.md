@@ -22,8 +22,8 @@ Let's see how easy a **febric** can be:
 
     class api extends Febric {
         public function getItem() {
-            $item_id = get('item_id', RE_NUM);                    // $item_id must be a natural number
-            return getRow('item', array('item_id' => $item_id));  // fetch data from database
+            $item_id = get('item_id', RE_NUM);              // $item_id must be a natural number
+            return getRow('item', [item_id' => $item_id]);  // fetch data from database
         }
     }
 
