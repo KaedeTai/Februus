@@ -5,9 +5,10 @@ A purified framework for web &amp; mobile development, which allow us to **febri
 
 The project eventually will support as many languages as possible. The first Language supported is PHP, which is called **phebric**.
 
-The philosophy of Februus is:
+The philosophy of **febric** is:
 * Don't reinvent the wheel, utilize all the existing solutions.
 * Keep It Simple & Stupid
+* Easy to learn/adopt/migrate
 * IDE integrated total solution
 * Compatible with other frameworks
 * Cross-Platform
